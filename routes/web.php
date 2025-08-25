@@ -19,6 +19,46 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\RecurringInvoiceController;
 use App\Http\Controllers\ProjectController;
 
+
+
+
+
+
+use App\Http\Controllers\ReportsController;
+
+use App\Models\Transactions;
+use App\Http\Controllers\TransactionController;
+
+use App\Models\RecurringExpense;
+use App\Http\Controllers\RecurringExpenseController;
+use App\Http\Controllers\RecurringExpenseCreateController;
+
+use App\Http\Controllers\settings\SettingsController;
+use App\Http\Controllers\settings\CompanyDetailsController;
+
+use App\Http\Controllers\settings\UserDetailsController;
+use App\Http\Controllers\settings\PaymentController;
+use App\Http\Controllers\settings\TaxController;
+use App\Http\Controllers\settings\TaskController;
+use App\Http\Controllers\settings\ProductsController;
+use App\Http\Controllers\settings\ExpenseController;
+
+use App\Http\Controllers\settings\WorkFlowController;
+use App\Http\Controllers\settings\CreditcardANDbankcontroller;
+use App\Http\Controllers\settings\AccountManagmentController;
+use App\Http\Controllers\settings\EmailSettingsController;
+use App\Http\Controllers\settings\ClientPortalController;
+use App\Http\Controllers\settings\GroupSettingsController;
+use App\Http\Controllers\settings\PaymentLinksController;
+use App\Http\Controllers\settings\UserManagmentController;
+
+
+
+use App\Models\CompanyDetails;
+use App\Models\Settings\Expense;
+use App\Models\Transaction;
+use Faker\Provider\ar_EG\Payment;
+
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
@@ -36,10 +76,6 @@ Route::get('/invoices-import', [InvoiceController::class, 'import'])->name('invo
 Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::get('/recurring-invoice-create', [RecurringInvoiceController::class, 'create'])->name('recurring.invoice.create');
 Route::get('/recurring-invoice-import', [RecurringInvoiceController::class, 'import'])->name('recurring.invoice.import');
-
-
-
-
 
 
 
@@ -77,17 +113,6 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('pr
 
 // Handle file import (optional)
 Route::post('/products-import', [ProductController::class, 'import'])->name('products.import');
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -142,3 +167,67 @@ Route::delete('/recurring-invoices/{invoice}', [RecurringInvoiceController::clas
 
 
 
+
+
+//recurring-expenses page
+Route::get('/recurring-expenses', [RecurringExpenseController::class, 'index'])->name('recurring_expense.index');
+Route::get('/recurring-expenses-create', [RecurringExpenseController::class, 'create'])->name('recurring_expense.create');
+Route::get('/recurring-expenses-import', [RecurringExpenseController::class, 'import'])->name('recurring_expense.import');
+Route::post('/recurring-expenses', [RecurringExpenseController::class, 'store'])->name('recurring_expense.store');
+Route::delete('recurring_expenses/{recurring_expense}', [RecurringExpenseController::class, 'destroy'])->name('recurring_expense.destroy');
+Route::get('/recurring_expenses/{id}/edit',  [RecurringExpenseController::class, 'edit'])->name('recurring_expense.edit');
+Route::put('/recurring_expenses/{id}', [RecurringExpenseController::class, 'update'])->name('recurring_expense.update');
+
+//transaction page
+Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+Route::get('/transactions-create', [TransactionController::class, 'create'])->name('transactions.create');
+Route::get('/transactions-import', [TransactionController::class, 'import'])->name('transactions.import');
+Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+Route::delete('transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
+Route::get('/transactions/{id}/edit',  [TransactionController::class, 'edit'])->name('transactions.edit');
+Route::put('/transactions/{id}', [TransactionController::class, 'update'])->name('transactions.update');
+
+
+
+//settings page
+Route::get( '/settings', [SettingsController::class, 'index'])->name('settings.index');
+
+Route::get( '/settings/company-details', [CompanyDetailsController::class, 'index'])->name('companydetails.index');
+
+Route::put('/settings/companydetails/update-details', [CompanyDetailsController::class, 'updateDetails'])->name('companydetails.updateDetails');
+Route::put('/settings/companydetails/update-address', [CompanyDetailsController::class, 'updateAddress'])->name('companydetails.updateAddress');
+
+Route::get('/settings/user-details', [UserDetailsController::class, 'index'])->name('userdetails.index');
+Route::post('/settings/user-details', [UserDetailsController::class, 'store'])->name('userdetails.store');
+
+Route::get('/settings/payment-settings', [PaymentController::class, 'index'])->name('payment.index');
+Route::post('/settings/payment-settings',  [PaymentController::class, 'store'])->name(name: 'payment.store');
+///////////////////////////////////////////////////////////
+
+// Tax settings page
+Route::get('/settings/tax-settings', [TaxController::class, 'index'])->name('tax.index');
+
+// Add new tax rate
+Route::post('/settings/tax-settings', [TaxController::class, 'store'])->name('tax.store');
+
+// Update global tax settings (toggles, selects, etc.)
+Route::post('/settings/tax-settings/update-settings', [TaxController::class, 'updateSettings'])->name('tax.updateSettings');
+
+// Delete a tax rate
+Route::delete('/settings/tax-settings/{taxrate}', [TaxController::class, 'destroy'])->name('tax.destroy');
+
+
+
+/////////////////////////////////////////////
+Route::get('/settings/products-settings', [ProductsController::class, 'index'])->name('productsettings.index');
+Route::post('/settings/products-settings',  [ProductsController::class, 'store'])->name(name: 'productsettings.store');
+
+Route::get('/settings/task-settings', [TaskController::class, 'index'])->name('task.index');
+Route::post('/settings/task-settings', [TaskController::class, 'store'])->name(name: 'task.store');
+
+Route::get('/settings/expense-settings', [ExpenseController::class, 'index'])->name('expense.index');
+Route::post('/settings/expense-settings', [ExpenseController::class, 'store'])->name(name: 'expense.store');
+
+Route::get('/settings/account-managment', action: [AccountManagmentController::class, 'index'])->name(name: 'accountmanagment.index');
+Route::post('/settings/account-managment', [AccountManagmentController::class, 'store'])->name(name: 'accountmanagment.store');
+Route::delete('settings/account-managment', [AccountManagmentController::class, 'destroy'])->name('accountmanagment.destroy');
