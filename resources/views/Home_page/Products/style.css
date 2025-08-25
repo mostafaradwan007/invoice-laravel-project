@@ -1,0 +1,123 @@
+/* General Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+  background-color: #fdfdfb;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  letter-spacing: 0.5px;
+}
+
+p, li {
+  font-size: 1.05rem;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(145deg, #fffbe6, #fff8c6);
+  border-bottom: 3px dashed #ffd700;
+  transition: background 0.6s ease-in-out;
+  animation: pulse-bg 10s infinite ease-in-out;
+}
+
+@keyframes pulse-bg {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Feature Images */
+.feature-img {
+  max-width: 80%;
+  height: auto;
+  border-radius: 18px;
+  border: 5px double #ffd700;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.6s ease, box-shadow 0.4s ease;
+  animation: floaty 5s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.feature-img:hover {
+  transform: scale(1.06) rotate(-1.5deg);
+  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.4);
+}
+
+/* Sections */
+.section {
+  padding: 40px 0;
+  transition: transform 0.3s ease;
+}
+
+.section:hover {
+  transform: scale(1.01);
+}
+
+/* Buttons */
+.btn-outline-warning {
+  border-width: 2px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ffd700;
+  color: #212529;
+  border-color: #ffd700;
+  box-shadow: 0 0 15px #ffd700aa;
+}
+
+.btn-outline-warning::after {
+  content: "✨";
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-warning:hover::after {
+  right: -35px;
+  opacity: 1;
+}
+
+/* Hover Glow for CTA */
+.hover-glow:hover {
+  box-shadow: 0 0 25px #ffd700;
+  transform: translateY(-2px);
+}
+
+/* Lists inside sections */
+.section ul li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 8px;
+}
+
+.section ul li i {
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+
+/* Footer */
+footer {
+  background-color: #fffce5;
+  color: #555;
+  font-size: 0.9rem;
+}

@@ -1,144 +1,143 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\RecurringInvoiceController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Landing Pages
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/clients', [ClientController::class, 'index'])->name('clients');
-Route::get('/products', [ProductController::class, 'index'])->name('products');
-Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices');
-Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring.invoices');
-Route::get('/client-create', [ClientController::class, 'create'])->name('client.create');
-Route::get('/client-import', [ClientController::class, 'import'])->name('client.import');
-Route::get('/product-create', [ProductController::class, 'create'])->name('product.create');
-Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.create');
-Route::get('/recurring-invoice-create', [RecurringInvoiceController::class, 'create'])->name('recurring.invoice.create');
+Route::get('/', function () {
+    return view('home'); // تأكدي إن في resources/views/home.blade.php
+})->name('home');
 
-Route::get('/products-import', [ProductController::class, 'import'])->name('products.import');
-Route::get('/invoices-import', [InvoiceController::class, 'import'])->name('invoices.import');
-Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.create');
-Route::get('/recurring-invoice-create', [RecurringInvoiceController::class, 'create'])->name('recurring.invoice.create');
-Route::get('/recurring-invoice-import', [RecurringInvoiceController::class, 'import'])->name('recurring.invoice.import');
+Route::get('/products', function () {
+    return view('Products.products');
+})->name('products');
 
+Route::get('/pricing', function () {
+    return view('pricing');
+})->name('pricing');
 
+Route::get('/pos-features', function () {
+    return view('pos-features');
+})->name('pos-features');
 
+Route::get('/why-us', function () {
+    return view('whyus');
+})->name('whyus');
 
+Route::get('/how-it-works', function () {
+    return view('how-it-works');
+})->name('how-it-works');
 
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
 
+Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup');
+Route::post('/signup', [AuthController::class, 'register'])->name('signup.post');
 
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-Route::post('/client-store', [ClientController::class, 'store'])->name('client.store');
-Route::get('/clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit');
-Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
-Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
-Route::post('/clients/import_csv', [ClientController::class, 'import_csv'])->name('clients.import_csv');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
+/*
+|--------------------------------------------------------------------------
+| Dashboard
+|--------------------------------------------------------------------------
+*/
 
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard')
+    ->middleware('auth');
 
+/*
+|--------------------------------------------------------------------------
+| Profile Routes
+|--------------------------------------------------------------------------
+*/
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+/*
+|--------------------------------------------------------------------------
+| Clients CRUD
+|--------------------------------------------------------------------------
+*/
 
-// Display all products
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
+    Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
+    Route::get('/clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+    Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
+    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+    Route::post('/clients/import_csv', [ClientController::class, 'import_csv'])->name('clients.import_csv');
+});
 
-// Show form to create a new product
-Route::get('/product-create', [ProductController::class, 'create'])->name('products.create');
+/*
+|--------------------------------------------------------------------------
+| Products CRUD
+|--------------------------------------------------------------------------
+*/
 
-// Store a new product
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::post('/products/import', [ProductController::class, 'import'])->name('products.import');
+});
 
-// Show form to edit an existing product
-Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+/*
+|--------------------------------------------------------------------------
+| Invoices CRUD
+|--------------------------------------------------------------------------
+*/
 
-// Update an existing product
-Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::middleware('auth')->group(function () {
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+    Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+    Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
+    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
+    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
+});
 
-// Delete a product
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+/*
+|--------------------------------------------------------------------------
+| Recurring Invoices CRUD
+|--------------------------------------------------------------------------
+*/
 
-// Show import page (optional route if you’re using it)
-
-// Handle file import (optional)
-Route::post('/products-import', [ProductController::class, 'import'])->name('products.import');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// عرض كل الفواتير
-Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
-
-// عرض فورم إضافة فاتورة جديدة
-Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
-
-// حفظ فاتورة جديدة
-Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
-
-// عرض تفاصيل فاتورة واحدة
-Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
-
-// عرض فورم تعديل فاتورة
-Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
-
-// تحديث بيانات فاتورة
-Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
-
-// حذف فاتورة
-Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
-
-
-
-
-
-
-// عرض كل الفواتير
-Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring-invoices.index');
-
-// عرض فورم إضافة فاتورة جديدة
-Route::get('/recurring-invoices/create', [RecurringInvoiceController::class, 'create'])->name('recurring-invoices.create');
-
-// حفظ فاتورة جديدة
-Route::post('/recurring-invoices', [RecurringInvoiceController::class, 'store'])->name('recurring-invoices.store');
-
-// عرض تفاصيل فاتورة واحدة
-Route::get('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'show'])->name('recurring-invoices.show');
-
-// عرض فورم تعديل فاتورة
-Route::get('/recurring-invoices/{invoice}/edit', [RecurringInvoiceController::class, 'edit'])->name('recurring-invoices.edit');
-
-// تحديث بيانات فاتورة
-Route::put('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'update'])->name('recurring-invoices.update');
-
-// حذف فاتورة
-Route::delete('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'destroy'])->name('recurring-invoices.destroy');
-
-
-
+Route::middleware('auth')->group(function () {
+    Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring-invoices.index');
+    Route::get('/recurring-invoices/create', [RecurringInvoiceController::class, 'create'])->name('recurring-invoices.create');
+    Route::post('/recurring-invoices', [RecurringInvoiceController::class, 'store'])->name('recurring-invoices.store');
+    Route::get('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'show'])->name('recurring-invoices.show');
+    Route::get('/recurring-invoices/{invoice}/edit', [RecurringInvoiceController::class, 'edit'])->name('recurring-invoices.edit');
+    Route::put('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'update'])->name('recurring-invoices.update');
+    Route::delete('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'destroy'])->name('recurring-invoices.destroy');
+});
 
 

@@ -358,7 +358,7 @@
       <i class="bi bi-house-door-fill"></i>
       Dashboard
     </a>
-    <a href="{{ route('clients') }}" class="sidebar-item">
+    <a href="{{ route('clients.index') }}" class="sidebar-item">
       <i class="bi bi-people"></i>
       Clients
       <i class="bi bi-plus plus-icon"></i>
@@ -418,22 +418,18 @@
       Expenses
       <i class="bi bi-plus plus-icon"></i>
     </a>
-    <a href="./recurring-expenses" class="sidebar-item">
+    <a href="{{ route('recurring_expense.index') }}" class="sidebar-item">
       <i class="bi bi-arrow-repeat"></i>
       Recurring Expenses
       <i class="bi bi-plus plus-icon"></i>
-    </a>
-    <a href="./transactions" class="sidebar-item">
+    </a>'
+    <a href="{{ route('transactions.index') }}" class="sidebar-item">
       <i class="bi bi-arrow-up-arrow-down"></i>
       Transactions
       <i class="bi bi-plus plus-icon"></i>
     </a>
-    <a href="./reports" class="sidebar-item">
-      <i class="bi bi-graph-up"></i>
-      Reports
-      <i class="bi bi-plus plus-icon"></i>
-    </a>
-    <a href="./settings" class="sidebar-item">
+ 
+    <a href="{{ route('settings.index') }}" class="sidebar-item">
       <i class="bi bi-gear"></i>
       Settings
     </a>

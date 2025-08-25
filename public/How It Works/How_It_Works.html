@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FatoraBee - How It Works</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
+            overflow-x: hidden;
+        }
+
+        .main-section {
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .step-card:hover::before {
+            left: 100%;
+        }
+
+        .step-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-icon {
+            font-size: 4rem;
+            color: #ff8f00;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .step-number {
+            font-size: 1.2rem;
+            color: #f57f17;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            color: #555;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .step-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .feature-section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .feature-section:nth-child(even) {
+            background: linear-gradient(135deg, #fff59d 0%, #ffcc02 100%);
+        }
+
+        .feature-section:nth-child(odd) {
+            background: linear-gradient(135deg, #fffde7 0%, #fff8e1 100%);
+        }
+
+        .feature-content {
+            background: rgba(255,255,255,0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .feature-content.right {
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .feature-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-description {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #ffd700, #ffeb3b);
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: floatingElements 15s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: -5s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: -2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 80%;
+            left: 80%;
+            animation-delay: -8s;
+        }
+
+        @keyframes floatingElements {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Intersection Observer Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .feature-title {
+                font-size: 2rem;
+            }
+            
+            .step-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Header Styles */
+        .sticky-top {
+            z-index: 1030;
+        }
+        
+        .logo-image {
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-image:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-3 sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-receipt fa-lg text-warning me-2"></i>
+                <img src="../img/WhatsApp Image 2025-07-21 at 02.56.39_8af938a4.jpg" alt="FatoraBee Logo" class="logo-image me-2" style="width: 70px; height: 70px; object-fit: contain;">
+                <h4 class="m-0 fw-bold">
+                    <span class="text-dark">Fatora</span><span class="text-warning">Bee</span>
+                </h4>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- How It Works Section -->
+    <section class="hero-bg main-section">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <div class="container py-5">
+            <h1 class="section-title">How FatoraBee Works</h1>
+            <p class="section-subtitle">Create. Send. Get Paid.</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card animate-on-scroll text-center">
+                        <i class="fas fa-user-plus step-icon"></i>
+                        <div class="step-number">Step 1</div>
+                        <h3 class="step-title">Create a Free Account</h3>
+                        <ul class="step-list">
+                            <li>Create a Free Account</li>
+                            <li>Confirm Your Email</li>
+                            <li>Login & Customize!</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card animate-on-scroll text-center">
+                        <i class="fas fa-upload step-icon"></i>
+                        <div class="step-number">Step 2</div>
+                        <h3 class="step-title">Upload your Logo</h3>
+                        <ul class="step-list">
+                            <li>Upload Your Logo</li>
+                            <li>Enter Company Info</li>
+                            <li>Explore Invoice Designs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card animate-on-scroll text-center">
+                        <i class="fas fa-credit-card step-icon"></i>
+                        <div class="step-number">Step 3</div>
+                        <h3 class="step-title">Choose a Payment Gateway</h3>
+                        <ul class="step-list">
+                            <li>Stripe Connect</li>
+                            <li>PayPal, Venmo</li>
+                            <li>GoCardless, Square</li>
+                            <li>Authorize, PayFast</li>
+                            <li>Many Payment Options!</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card animate-on-scroll text-center">
+                        <i class="fas fa-file-invoice-dollar step-icon"></i>
+                        <div class="step-number">Step 4</div>
+                        <h3 class="step-title">Create Invoices, Get Paid!</h3>
+                        <ul class="step-list">
+                            <li>Email Invoices & Quotes</li>
+                            <li>Time-Tasks & Projects</li>
+                            <li>Track Expenses & Vendors</li>
+                            <li>Too Much to List!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down fa-2x"></i>
+        </div>
+    </section>
+
+    <!-- Everything You Need Section -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="feature-content animate-on-scroll">
+                        <h2 class="feature-title">Everything you need</h2>
+                        <p class="feature-description">
+                            Create & email invoices in seconds. Incredibly easy to use.
+                            FatoraBee was built to serve freelancers and business owners with a complete suite of invoicing & payment tools to advance your business.
+                            Every feature is geared towards accurate and secure invoicing and getting you paid.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="image-placeholder animate-on-scroll">
+                        <i class="fas fa-file-invoice fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recurring Invoicing Section -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="feature-content right animate-on-scroll">
+                        <h2 class="feature-title">Recurring Invoicing & Auto-billing</h2>
+                        <p class="feature-description">
+                            Do you charge clients monthly or annually? Setup recurring invoices & auto-bill clients!
+                            With FatoraBee you can send beautiful branded invoices with minimum of effort and maximum professionalism.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="image-placeholder animate-on-scroll">
+                        <i class="fas fa-sync-alt fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Time Tracking Section -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="feature-content animate-on-scroll">
+                        <h2 class="feature-title">Send billable-tasks to invoice with 1-click</h2>
+                        <p class="feature-description">
+                            Task time-tracking feature allows you to accurately record every second spent on each individual task.
+                            When you're done with a work-task, simply click and send your tasks work-time to invoice!
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="image-placeholder animate-on-scroll">
+                        <i class="fas fa-stopwatch fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expense Tracking Section -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="feature-content right animate-on-scroll">
+                        <h2 class="feature-title">Track expenses & manage vendors</h2>
+                        <p class="feature-description">
+                            With FatoraBee, all your earnings, expenses, clients and vendors are stored and managed in one system.
+                            Categorize your vendors & re-invoice expenses to clients, or simply run expense reports.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="image-placeholder animate-on-scroll">
+                        <i class="fas fa-chart-line fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add staggered animation delay to step cards
+        document.querySelectorAll('.step-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover effect to cards
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-element');
+            
+            parallax.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        // Add dynamic gradient animation
+        let gradientAngle = 0;
+        setInterval(() => {
+            gradientAngle += 1;
+            document.querySelectorAll('.hero-bg').forEach(element => {
+                element.style.background = `linear-gradient(${gradientAngle}deg, #ffd700 0%, #ffeb3b 100%)`;
+            });
+        }, 100);
+
+        // Add click ripple effect to cards
+        document.querySelectorAll('.step-card, .feature-content').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            .step-card, .feature-content {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>
