@@ -84,6 +84,23 @@ Route::middleware('auth')->group(function () {
 
     // Dashboard main
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices');
+Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring.invoices');
+Route::get('/client-create', [ClientController::class, 'create'])->name('client.create');
+Route::get('/client-import', [ClientController::class, 'import'])->name('client.import');
+Route::get('/product-create', [ProductController::class, 'create'])->name('product.create');
+Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.create');
+Route::get('/recurring-invoice-create', [RecurringInvoiceController::class, 'create'])->name('recurring.invoice.create');
+
+Route::get('/products-import', [ProductController::class, 'import'])->name('products.import');
+Route::get('/invoices-import', [InvoiceController::class, 'import'])->name('invoices.import');
+Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.create');
+Route::get('/recurring-invoice-create', [RecurringInvoiceController::class, 'create'])->name('recurring.invoice.create');
+Route::get('/recurring-invoice-import', [RecurringInvoiceController::class, 'import'])->name('recurring.invoice.import');
+
+
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
@@ -321,6 +338,13 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('pr
 // Handle file import (optional)
 Route::post('/products-import', [ProductController::class, 'import'])->name('products.import');
 
+
+
+Route::post('/client-store', [ClientController::class, 'store'])->name('client.store');
+Route::get('/clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
+Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+Route::post('/clients/import_csv', [ClientController::class, 'import_csv'])->name('clients.import_csv');
 
 
 
