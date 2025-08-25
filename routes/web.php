@@ -253,3 +253,75 @@ Route::post('/settings/tax-settings/update-settings', [TaxController::class, 'up
 
 // Delete a tax rate
 Route::delete('/settings/tax-settings/{taxrate}', [TaxController::class, 'destroy'])->name('tax.destroy');
+
+
+// عرض كل الفواتير
+Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring-invoices.index');
+
+// عرض فورم إضافة فاتورة جديدة
+Route::get('/recurring-invoices/create', [RecurringInvoiceController::class, 'create'])->name('recurring-invoices.create');
+
+// حفظ فاتورة جديدة
+Route::post('/recurring-invoices', [RecurringInvoiceController::class, 'store'])->name('recurring-invoices.store');
+
+// عرض تفاصيل فاتورة واحدة
+Route::get('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'show'])->name('recurring-invoices.show');
+
+// عرض فورم تعديل فاتورة
+Route::get('/recurring-invoices/{invoice}/edit', [RecurringInvoiceController::class, 'edit'])->name('recurring-invoices.edit');
+
+// تحديث بيانات فاتورة
+Route::put('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'update'])->name('recurring-invoices.update');
+
+// حذف فاتورة
+Route::delete('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'destroy'])->name('recurring-invoices.destroy');
+
+
+// عرض كل الفواتير
+Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+
+// عرض فورم إضافة فاتورة جديدة
+Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+
+// حفظ فاتورة جديدة
+Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+
+// عرض تفاصيل فاتورة واحدة
+Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+
+// عرض فورم تعديل فاتورة
+Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
+
+// تحديث بيانات فاتورة
+Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
+
+// حذف فاتورة
+Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
+
+// Display all products
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+// Show form to create a new product
+Route::get('/product-create', [ProductController::class, 'create'])->name('products.create');
+
+// Store a new product
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+// Show form to edit an existing product
+Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+// Update an existing product
+Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+
+// Delete a product
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+// Show import page (optional route if you’re using it)
+
+// Handle file import (optional)
+Route::post('/products-import', [ProductController::class, 'import'])->name('products.import');
+
+
+
+
+
