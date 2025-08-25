@@ -11,7 +11,29 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\settings\SettingsController;
+use App\Http\Controllers\ReportsController;
 
+use App\Models\Transactions;
+use App\Models\RecurringExpense;
+use App\Http\Controllers\RecurringExpenseCreateController;
+
+use App\Http\Controllers\settings\CompanyDetailsController;
+
+use App\Http\Controllers\settings\UserDetailsController;
+use App\Http\Controllers\settings\PaymentController;
+use App\Http\Controllers\settings\TaxController;
+use App\Http\Controllers\settings\TaskController;
+use App\Http\Controllers\settings\ProductsController;
+use App\Http\Controllers\settings\ExpenseController;
+
+use App\Http\Controllers\settings\WorkFlowController;
+use App\Http\Controllers\settings\CreditcardANDbankcontroller;
+use App\Http\Controllers\settings\AccountManagmentController;
+use App\Http\Controllers\settings\EmailSettingsController;
+use App\Http\Controllers\settings\ClientPortalController;
+use App\Http\Controllers\settings\GroupSettingsController;
+use App\Http\Controllers\settings\PaymentLinksController;
+use App\Http\Controllers\settings\UserManagmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -181,3 +203,4 @@ Route::post('/transactions', [TransactionController::class, 'store'])->name('tra
 Route::delete('transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
 Route::get('/transactions/{id}/edit',  [TransactionController::class, 'edit'])->name('transactions.edit');
 Route::put('/transactions/{id}', [TransactionController::class, 'update'])->name('transactions.update');
+
