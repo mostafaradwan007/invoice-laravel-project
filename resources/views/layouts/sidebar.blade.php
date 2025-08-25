@@ -354,81 +354,95 @@
       </div>
     </div>
 
-    <a href="/" class="sidebar-item">
+    <a href="{{ route('dashboard') }}" class="sidebar-item">
       <i class="bi bi-house-door-fill"></i>
       Dashboard
     </a>
-    <a href="{{ route('clients.index') }}" class="sidebar-item">
+
+    <a href="{{ route('clients') }}" class="sidebar-item">
       <i class="bi bi-people"></i>
       Clients
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="{{ route('products.index') }}" class="sidebar-item">
       <i class="bi bi-bag"></i>
       Products
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="{{ route('invoices.index') }}" class="sidebar-item">
       <i class="bi bi-file-earmark-text"></i>
       Invoices
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="{{ route('recurring-invoices.index') }}" class="sidebar-item">
       <i class="bi bi-arrow-repeat"></i>
       Recurring Invoices
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="#" class="sidebar-item">
       <i class="bi bi-credit-card"></i>
       Payments
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="#" class="sidebar-item">
       <i class="bi bi-file-text"></i>
       Quotes
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="#" class="sidebar-item">
       <i class="bi bi-journal-text"></i>
       Credits
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="#" class="sidebar-item">
       <i class="bi bi-briefcase"></i>
       Projects
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="#" class="sidebar-item">
       <i class="bi bi-check2-square"></i>
       Tasks
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="#" class="sidebar-item">
       <i class="bi bi-building"></i>
       Vendors
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="#" class="sidebar-item">
       <i class="bi bi-clipboard-check"></i>
       Purchase Orders
       <i class="bi bi-plus plus-icon"></i>
     </a>
-    <a href="" class="sidebar-item">
+
+    <a href="#" class="sidebar-item">
       <i class="bi bi-wallet2"></i>
       Expenses
       <i class="bi bi-plus plus-icon"></i>
     </a>
+
     <a href="{{ route('recurring_expense.index') }}" class="sidebar-item">
       <i class="bi bi-arrow-repeat"></i>
       Recurring Expenses
       <i class="bi bi-plus plus-icon"></i>
-    </a>'
+    </a>
+
     <a href="{{ route('transactions.index') }}" class="sidebar-item">
       <i class="bi bi-arrow-up-arrow-down"></i>
       Transactions
       <i class="bi bi-plus plus-icon"></i>
     </a>
- 
+
     <a href="{{ route('settings.index') }}" class="sidebar-item">
       <i class="bi bi-gear"></i>
       Settings
@@ -438,14 +452,13 @@
       <a href="#"><i class="bi bi-envelope"></i></a>
       <a href="#"><i class="bi bi-chat-dots"></i></a>
       <a href="#"><i class="bi bi-question-circle"></i></a>
-        <a href="#" class="tooltip-custom" data-tooltip="Info" id="infoIcon">
+      <a href="#" class="tooltip-custom" data-tooltip="Info" id="infoIcon">
         <i class="bi bi-info-circle"></i>
       </a>
       <a href="#"><i class="bi bi-moon"></i></a>
       <a href="#"><i class="bi bi-box-arrow-in-right"></i></a>
     </div>
   </nav>
-
 
   <!-- Info Popup -->
   <div class="info-popup" id="infoPopup">
@@ -454,36 +467,24 @@
     </button>
 
     <div class="popup-header">
-      <div class="user-avatar">
-        MR
-      </div>
+      <div class="user-avatar">MR</div>
       <div class="user-name">..</div>
       <div class="user-email">@gmail.com</div>
     </div>
 
     <div class="social-links">
-      <a href="https://www.facebook.com/" target="_blank" class="tooltip-custom" data-tooltip="Facebook">
-        <i class="bi bi-facebook"></i>
-      </a>
-      <a href="https://www.twitter.com/" target="_blank" class="tooltip-custom" data-tooltip="Twitter">
-        <i class="bi bi-twitter"></i>
-      </a>
-      <a href="https://www.linkedin.com/" target="_blank" class="tooltip-custom" data-tooltip="LinkedIn">
-        <i class="bi bi-linkedin"></i>
-      </a>
-      <a href="https://www.instagram.com/" target="_blank" class="tooltip-custom" data-tooltip="Instagram">
-        <i class="bi bi-instagram"></i>
-      </a>
-      <a href="https://www.github.com/" target="_blank" class="tooltip-custom" data-tooltip="GitHub">
-        <i class="bi bi-github"></i>
-      </a>
+      <a href="https://www.facebook.com/" target="_blank" class="tooltip-custom" data-tooltip="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.twitter.com/" target="_blank" class="tooltip-custom" data-tooltip="Twitter"><i class="bi bi-twitter"></i></a>
+      <a href="https://www.linkedin.com/" target="_blank" class="tooltip-custom" data-tooltip="LinkedIn"><i class="bi bi-linkedin"></i></a>
+      <a href="https://www.instagram.com/" target="_blank" class="tooltip-custom" data-tooltip="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.github.com/" target="_blank" class="tooltip-custom" data-tooltip="GitHub"><i class="bi bi-github"></i></a>
     </div>
 
     <div class="popup-footer">
       <small>Bee Company Dashboard v2.1</small>
     </div>
   </div>
-
+</body>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
