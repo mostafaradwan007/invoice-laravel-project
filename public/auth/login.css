@@ -1,0 +1,166 @@
+body {
+  background: linear-gradient(135deg, #fff9dc, #ffe680);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+.login-section {
+  height: 100vh;
+  background-image: url("https://www.transparenttextures.com/patterns/white-wall-3.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 440px;
+  background-color: #fffef4;
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 2px dashed #ffd70066;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Logo Animation */
+.logo {
+  width: 60px;
+  height: 60px;
+  animation: breathe 2.5s ease-in-out infinite;
+}
+
+/* Breathing effect */
+@keyframes breathe {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #bbb;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: #000;
+}
+
+.form-floating input:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+}
+
+.form-floating input::placeholder {
+  font-style: italic;
+  color: #aaa;
+}
+
+.btn-warning {
+  background-color: #ffd700;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.btn-warning:hover {
+  background-color: #ffc400;
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(255, 204, 0, 0.4);
+}
+
+.google-btn img.icon {
+  width: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.github-btn i {
+  vertical-align: middle;
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
+.text-muted.small {
+  font-size: 0.9rem;
+}
+
+/* Divider line between login & social */
+.text-center.my-3 {
+  position: relative;
+  font-weight: 600;
+}
+
+.text-center.my-3::before,
+.text-center.my-3::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.text-center.my-3::before {
+  left: 0;
+}
+
+.text-center.my-3::after {
+  right: 0;
+}
+
+/* Toast style improvement */
+.toast {
+  opacity: 1;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+}
+
+/* Spinner style */
+#loginSpinner .spinner-border {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive tweak */
+@media (max-width: 576px) {
+  .login-box {
+    padding: 1.5rem;
+  }
+
+  .google-btn,
+  .github-btn {
+    font-size: 0.9rem;
+  }
+
+  .logo {
+    width: 48px;
+    height: 48px;
+  }
+}

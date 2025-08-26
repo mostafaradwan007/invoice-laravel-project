@@ -1,0 +1,604 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fffbea;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  padding: 15px 0;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar .brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f4b400;
+}
+
+.navbar .nav-link {
+  margin-left: 15px;
+  color: #555;
+  font-weight: 500;
+}
+
+.navbar .nav-link:hover {
+  color: #f4b400;
+}
+
+.btn-primary {
+  background-color: #f4b400;
+  border: none;
+  font-weight: 500;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(244, 180, 0, 0.4);
+}
+
+.btn-primary:hover {
+  background-color: #d39e00;
+  transform: scale(1.05);
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #fffbea 40%, #fff2c5 100%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-section .container {
+  max-width: 1100px;
+}
+
+.hero-section h1 {
+  color: #f4b400;
+  font-size: 2.8rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section .lead {
+  color: #555;
+  font-size: 1.25rem;
+}
+
+.hero-section .btn-primary {
+  font-size: 1.1rem;
+  padding: 12px 40px;
+}
+
+.hero-image i {
+  font-size: 80px;
+  color: #f4b400;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Cards */
+.step-card,
+.feature-item,
+.audience-card,
+.testimonial-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  padding: 20px;
+  transition: 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card:hover,
+.feature-item:hover,
+.audience-card:hover,
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.step-number {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #f4b400;
+}
+
+/* Analytics Cards */
+.analytics-card {
+  background: #fffde7;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px dashed #f4b400;
+}
+
+.analytics-card:hover {
+  box-shadow: 0 0 15px rgba(244, 180, 0, 0.2);
+  transform: scale(1.03);
+}
+
+.analytics-amount {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+/* Feature Icons */
+.feature-icon {
+  font-size: 2.2rem;
+  color: #f4b400;
+  margin-bottom: 10px;
+}
+
+
+
+/* Navbar Brand Logo */
+.logo-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Smooth glowing border effect (optional) */
+.glow-border {
+  border: 2px solid #f4b400;
+  box-shadow: 0 0 10px #f4b40080;
+}
+.template-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.template-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.template-icon i {
+  background-color: #fff8dc;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 5px 10px rgba(244, 180, 0, 0.2);
+}
+.audience-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #fce9b4;
+}
+
+.audience-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(244, 180, 0, 0.15);
+}
+
+.audience-icon i {
+  background-color: #fff8dc;
+  padding: 20px;
+  border-radius: 50%;
+  box-shadow: 0 6px 12px rgba(244, 180, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.audience-icon i:hover {
+  transform: rotate(8deg) scale(1.05);
+}
+.testimonial-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #ffeaa7;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(244, 180, 0, 0.2);
+}
+
+.testimonial-card .stars i {
+  font-size: 1.2rem;
+  color: #f4b400;
+}
+
+.hover-float {
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-float:hover {
+  transform: translateY(-8px);
+}
+.accordion-button {
+  background-color: #fff9e7;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #f4b400;
+  color: white;
+  box-shadow: none;
+}
+
+.accordion-body {
+  background-color: #fffefa;
+  border-radius: 0 0 8px 8px;
+  padding: 1rem 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.accordion-item {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #f4b400;
+}
+
+.cta-section .btn {
+  border-radius: 50px;
+  font-size: 1.1rem;
+  transition: 0.3s ease;
+}
+
+.cta-section .btn:hover {
+  transform: scale(1.05);
+  background-color: #fff3cd;
+  color: #222;
+}
+
+
+.social-links a {
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: #f4b400;
+  transform: scale(1.1);
+}
+.hero-section {
+  background-color: #fffbea;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  padding: 80px 0;
+}
+
+.honeycomb-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140%;
+  height: 140%;
+  opacity: 0.2;
+  z-index: 0;
+  transform: rotate(8deg);
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-icon-wrapper .buzz-icon {
+  animation: floatBuzz 3s ease-in-out infinite;
+}
+
+@keyframes floatBuzz {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0); }
+}
+/* Transparent Background + Smooth Shadow */
+.navbar {
+    transition: all 0.4s ease-in-out;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* لما يعمل Scroll */
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand Name Hover */
+.navbar-brand .brand-name:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+/* Links Hover Animation */
+.navbar .nav-link {
+    position: relative;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #f1c40f;
+    bottom: 0;
+    left: 0;
+    transition: 0.4s;
+}
+
+.navbar .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Sign up Button Shine Effect */
+.navbar .btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, transparent, #fff8b1, transparent);
+    transform: rotate(25deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(25deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(25deg);
+    }
+}
+
+/* Bee SVG beside logo (animated) */
+.logo-image::after {
+    content: "🐝";
+    position: absolute;
+    animation: fly-bee 2.5s infinite ease-in-out;
+    margin-left: 5px;
+}
+
+@keyframes fly-bee {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* Shake Logo Animation */
+@keyframes shake {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+  100% { transform: rotate(0); }
+}
+
+.shake-logo {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* Flash Button Effect */
+@keyframes flash {
+  0% { box-shadow: 0 0 0px #fff; }
+  50% { box-shadow: 0 0 15px #ffe066; }
+  100% { box-shadow: 0 0 0px #fff; }
+}
+
+.btn-flash {
+  animation: flash 0.5s;
+}
+
+/* Scroll to top button */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  padding: 10px 15px;
+  font-size: 20px;
+  background-color: #f1c40f;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Base dark mode style */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+/* Links and text */
+body.dark-mode a {
+    color: #f1c40f;
+}
+
+body.dark-mode .btn {
+    border-color: #f1c40f;
+    color: #f1c40f;
+}
+
+body.dark-mode .btn:hover {
+    background-color: #f1c40f;
+    color: #121212;
+}
+
+/* Navbar */
+body.dark-mode .navbar {
+    background-color: #1e1e1e !important;
+}
+
+/* Footer */
+body.dark-mode footer {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+/* Cards & Sections */
+body.dark-mode .bg-white,
+body.dark-mode .bg-light {
+    background-color: #2a2a2a !important;
+    color: #f0f0f0;
+}
+
+body.dark-mode .text-dark {
+    color: #f0f0f0 !important;
+}
+.step-card {
+  border: 2px solid #ffeaa7;
+  border-radius: 16px;
+  padding: 20px;
+  background: #fffdf7;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(241, 196, 15, 0.2);
+}
+
+.step-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #f1c40f;
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  opacity: 0.1;
+  font-family: 'Poppins', sans-serif;
+}
+
+.step-card h6 {
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.step-card ul li {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 6px;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.step-card ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #f1c40f;
+  font-weight: bold;
+}
+.step-card {
+  border: 2px solid #ffeaa7;
+  border-radius: 16px;
+  padding: 20px;
+  background: #fffdf7;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative; /* <<<< ده مهم علشان step-number يظهر */
+  overflow: hidden;
+}
+
+.step-card.animated-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.6s ease-out;
+}
+.footer {
+  background: linear-gradient(135deg, #fffbe6, #ffe680); /* عسل لطيف */
+  color: #000;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border-top: 5px solid #ffd700;
+}
+
+.footer .brand-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.footer h5 {
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: #333;
+  text-decoration: none;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.footer .social-links i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer .social-links a:hover i {
+  color: #000;
+  transform: scale(1.2) rotate(-10deg);
+}
+
+/* خلية نحل SVG خفيفة في الخلفية */
+.footer::before {
+  content: "";
+  background-image: url("https://www.svgrepo.com/show/280120/honeycomb.svg");
+  background-size: 250px;
+  opacity: 0.05;
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* لتمييز Bee */
+.brand-name .text-warning {
+  animation: buzz 1s infinite alternate ease-in-out;
+}
+
+@keyframes buzz {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(2deg); }
+  100% { transform: rotate(-2deg); }
+}
+.footer p,
+.footer a,
+.footer .footer-legal-links a {
+  color: #000 !important;
+}

@@ -1,0 +1,38 @@
+body {
+  background: linear-gradient(135deg, #fff9dc, #ffe680);
+  font-family: 'Poppins', sans-serif;
+}
+
+.glassy {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border: 3px solid #ffd700;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #ffd700;
+  color: #000;
+  font-weight: bold;
+}
+
+.nav-tabs .nav-link {
+  color: #333;
+  transition: 0.3s;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #000;
+}
+
+.btn-warning {
+  background-color: #ffd700;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #ffcc00;
+}

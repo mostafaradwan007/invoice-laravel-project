@@ -1,0 +1,41 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #1f1f1f;
+}
+
+.hero-section {
+  background: linear-gradient(to right, #000000, #facc15);
+}
+
+.step-card {
+  background-color: #fff;
+  border: 2px solid #facc15;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+.step-card:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+}
+.icon-wrapper {
+  background-color: #fffbea;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.features-section h2 {
+  color: #000;
+  font-weight: bold;
+}
+.animated-float {
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
