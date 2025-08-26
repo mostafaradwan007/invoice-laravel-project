@@ -30,9 +30,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/products', function () {
+Route::get('/home-products', function () {
     return view('Products.products');
-})->name('products');
+})->name('home.products');
 
 Route::get('/pricing', function () {
     return view('pricing');
