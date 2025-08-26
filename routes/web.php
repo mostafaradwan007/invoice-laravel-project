@@ -24,41 +24,8 @@ use App\Http\Controllers\settings\ProductsController;
 use App\Http\Controllers\settings\ExpenseController;
 use App\Http\Controllers\settings\AccountManagmentController;
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/clients', [ClientController::class, 'index'])->name('clients');
-Route::get('/products', [ProductController::class, 'index'])->name('products');
-Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices');
-Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring.invoices');
-Route::get('/client-create', [ClientController::class, 'create'])->name('client.create');
-Route::get('/client-import', [ClientController::class, 'import'])->name('client.import');
-Route::get('/product-create', [ProductController::class, 'create'])->name('product.create');
-Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.create');
-Route::get('/recurring-invoice-create', [RecurringInvoiceController::class, 'create'])->name('recurring.invoice.create');
 
-Route::get('/products-import', [ProductController::class, 'import'])->name('products.import');
-Route::get('/invoices-import', [InvoiceController::class, 'import'])->name('invoices.import');
-Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.create');
-Route::get('/recurring-invoice-create', [RecurringInvoiceController::class, 'create'])->name('recurring.invoice.create');
-Route::get('/recurring-invoice-import', [RecurringInvoiceController::class, 'import'])->name('recurring.invoice.import');
-
-//Vendor    
-Route::delete('/vendors/bulk-delete', [VendorController::class, 'destroyMultiple'])->name('vendors.destroy.multiple');        // Routes for the import functionality
-Route::get('/vendors/import', [VendorController::class, 'showImportForm'])->name('vendors.import');
-Route::post('/vendors/import', [VendorController::class, 'handleImport'])->name('vendors.import.handle');
-//Main Routes
-Route::resource('/vendors', VendorController::class);
-//Tasks
-// Custom routes for import and bulk actions
-Route::delete('/tasks/bulk-delete', [TaskController::class, 'destroyMultiple'])->name('tasks.destroy.multiple');
-Route::get('/tasks/import', [TaskController::class, 'showImportForm'])->name('tasks.import');
-Route::post('/tasks/import', [TaskController::class, 'handleImport'])->name('tasks.import.handle');
-// Main Routes
-Route::resource('/tasks', TaskController::class);
-Route::get('/projects-by-client/{client}', function($client){
-    $clientProjects = App\Models\Project::where('client_id', $client->id)->get();
-    return view('tasks.index', compact('client', 'clientProjects'));
-});
 
 
 
@@ -210,6 +177,25 @@ Route::middleware('auth')->group(function () {
     Route::put('/recurring_expenses/{id}', [RecurringExpenseController::class, 'update'])->name('recurring_expense.update');
     Route::delete('/recurring_expenses/{recurring_expense}', [RecurringExpenseController::class, 'destroy'])->name('recurring_expense.destroy');
 
+    
+    //Vendor    
+Route::delete('/vendors/bulk-delete', [VendorController::class, 'destroyMultiple'])->name('vendors.destroy.multiple');        // Routes for the import functionality
+Route::get('/vendors/import', [VendorController::class, 'showImportForm'])->name('vendors.import');
+Route::post('/vendors/import', [VendorController::class, 'handleImport'])->name('vendors.import.handle');
+//Main Routes
+Route::resource('/vendors', VendorController::class);
+//Tasks
+// Custom routes for import and bulk actions
+Route::delete('/tasks/bulk-delete', [TaskController::class, 'destroyMultiple'])->name('tasks.destroy.multiple');
+Route::get('/tasks/import', [TaskController::class, 'showImportForm'])->name('tasks.import');
+Route::post('/tasks/import', [TaskController::class, 'handleImport'])->name('tasks.import.handle');
+// Main Routes
+Route::resource('/tasks', TaskController::class);
+Route::get('/projects-by-client/{client}', function($client){
+    $clientProjects = App\Models\Project::where('client_id', $client->id)->get();
+    return view('tasks.index', compact('client', 'clientProjects'));
+});
+    
     /*
     |--------------------------------------------------------------------------
     | Transaction Management

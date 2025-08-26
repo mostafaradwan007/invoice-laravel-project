@@ -358,7 +358,7 @@
       <i class="bi bi-house-door-fill"></i>
       Dashboard
     </a>
-    <a href="{{ route('clients') }}" class="sidebar-item">
+    <a href="{{ route('clients.index') }}" class="sidebar-item">
       <i class="bi bi-people"></i>
       Clients
       <i class="bi bi-plus plus-icon"></i>
