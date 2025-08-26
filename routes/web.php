@@ -10,23 +10,16 @@ use App\Http\Controllers\RecurringExpenseController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\settings\SettingsController;
 use App\Http\Controllers\settings\CompanyDetailsController;
 use App\Http\Controllers\settings\UserDetailsController;
-use App\Http\Controllers\settings\PaymentController;
+use App\Http\Controllers\settings\PaymentSettingsController;
 use App\Http\Controllers\settings\TaxController;
 use App\Http\Controllers\settings\TaskController;
 use App\Http\Controllers\settings\ProductsController;
 use App\Http\Controllers\settings\ExpenseController;
-use App\Http\Controllers\settings\WorkFlowController;
-use App\Http\Controllers\settings\CreditcardANDbankcontroller;
 use App\Http\Controllers\settings\AccountManagmentController;
-use App\Http\Controllers\settings\EmailSettingsController;
-use App\Http\Controllers\settings\ClientPortalController;
-use App\Http\Controllers\settings\GroupSettingsController;
-use App\Http\Controllers\settings\PaymentLinksController;
-use App\Http\Controllers\settings\UserManagmentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -101,7 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
     Route::get('/client-create', [ClientController::class, 'create'])->name('client.create');
     Route::get('/client-import', [ClientController::class, 'import'])->name('client.import');
-    
+
     // Client CRUD operations
     Route::post('/client-store', [ClientController::class, 'store'])->name('client.store');
     Route::get('/clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit');
@@ -118,7 +111,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/products-crud', [ProductController::class, 'index'])->name('products.index');
     Route::get('/product-create', [ProductController::class, 'create'])->name('products.create');
     Route::get('/products-import', [ProductController::class, 'import'])->name('products.import');
-    
+
     // Product CRUD operations
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
@@ -135,7 +128,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
     Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoices.create');
     Route::get('/invoices-import', [InvoiceController::class, 'import'])->name('invoices.import');
-    
+
     // Invoice CRUD operations
     Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
     Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
@@ -152,7 +145,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring-invoices.index');
     Route::get('/recurring-invoice-create', [RecurringInvoiceController::class, 'create'])->name('recurring-invoices.create');
     Route::get('/recurring-invoice-import', [RecurringInvoiceController::class, 'import'])->name('recurring-invoices.import');
-    
+
     // Recurring Invoice CRUD operations
     Route::post('/recurring-invoices', [RecurringInvoiceController::class, 'store'])->name('recurring-invoices.store');
     Route::get('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'show'])->name('recurring-invoices.show');
@@ -169,7 +162,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/recurring-expenses', [RecurringExpenseController::class, 'index'])->name('recurring_expense.index');
     Route::get('/recurring-expenses-create', [RecurringExpenseController::class, 'create'])->name('recurring_expense.create');
     Route::get('/recurring-expenses-import', [RecurringExpenseController::class, 'import'])->name('recurring_expense.import');
-    
+
     // Recurring Expense CRUD operations
     Route::post('/recurring-expenses', [RecurringExpenseController::class, 'store'])->name('recurring_expense.store');
     Route::get('/recurring_expenses/{id}/edit', [RecurringExpenseController::class, 'edit'])->name('recurring_expense.edit');
@@ -185,7 +178,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions-create', [TransactionController::class, 'create'])->name('transactions.create');
     Route::get('/transactions-import', [TransactionController::class, 'import'])->name('transactions.import');
-    
+
     // Transaction CRUD operations
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::get('/transactions/{id}/edit', [TransactionController::class, 'edit'])->name('transactions.edit');
@@ -210,8 +203,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/settings/user-details', [UserDetailsController::class, 'store'])->name('userdetails.store');
 
     // Payment Settings
-    Route::get('/settings/payment-settings', [PaymentController::class, 'index'])->name('payment.index');
-    Route::post('/settings/payment-settings', [PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/settings/payment-settings', [PaymentSettingsController::class, 'index'])->name('payment.index');
+    Route::post('/settings/payment-settings', [PaymentSettingsController::class, 'store'])->name('payment.store');
 
     // Tax Settings
     Route::get('/settings/tax-settings', [TaxController::class, 'index'])->name('tax.index');

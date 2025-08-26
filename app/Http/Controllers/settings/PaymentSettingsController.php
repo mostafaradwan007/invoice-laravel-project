@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\settings\Payment; // ✅ Singular Model name (Laravel convention)
 use Illuminate\Http\Request;
 
-class PaymentController extends Controller
+class PaymentSettingsController extends Controller
 {
     public function index()
     {
