@@ -398,12 +398,12 @@
       Projects
       <i class="bi bi-plus plus-icon"></i>
     </a>
-    <a href="#" class="sidebar-item">
+    <a href="{{ route('tasks.index') }}" class="sidebar-item">
       <i class="bi bi-check2-square"></i>
       Tasks
       <i class="bi bi-plus plus-icon"></i>
     </a>
-    <a href="#" class="sidebar-item">
+    <a href="{{ route('vendors.index') }}" class="sidebar-item">
       <i class="bi bi-building"></i>
       Vendors
       <i class="bi bi-plus plus-icon"></i>

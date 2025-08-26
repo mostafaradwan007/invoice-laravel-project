@@ -22,4 +22,15 @@ class Client extends Model
         'tax_exempt' => 'boolean',
         'add_to_invoices' => 'boolean',
     ];
+
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
