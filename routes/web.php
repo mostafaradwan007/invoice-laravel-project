@@ -305,3 +305,64 @@ Route::put('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 
 // حذف فاتورة
 Route::delete('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'destroy'])->name('recurring-invoices.destroy');
 });
+
+
+
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\NewClientController;
+use App\Http\Controllers\CreditController;
+use App\Http\Controllers\NewProjectController;
+
+// Redirect root to payments index
+Route::get('/', fn() => redirect()->route('payments.index'));
+
+// -------------------- PAYMENTS --------------------
+
+// Show import form + process import + download template
+Route::prefix('payments')->group(function () {
+    Route::get('/import', [PaymentController::class, 'showImportForm'])->name('payments.import.form');
+    Route::post('/import', [PaymentController::class, 'import'])->name('payments.import');
+    Route::get('/template', [PaymentController::class, 'downloadTemplate'])->name('payments.template');
+});
+
+// Resource routes for payments (excluding show)
+Route::resource('payments', PaymentController::class)->except(['show']);
+
+
+// -------------------- QUOTES --------------------
+
+Route::prefix('quotes')->group(function () {
+    Route::get('/', [QuoteController::class, 'index'])->name('quotes.index');           // List all quotes
+    Route::get('/create', [QuoteController::class, 'create'])->name('quotes.create');    // Show create form
+    Route::post('/store', [QuoteController::class, 'store'])->name('quotes.store');      // Store new quote
+
+    Route::get('/import', [QuoteController::class, 'showImportForm'])->name('quotes.import.form'); // Show import form
+    Route::get('/template', [QuoteController::class, 'downloadTemplate'])->name('quotes.template');
+
+    Route::post('/import', [QuoteController::class, 'import'])->name('quotes.import');   // Process CSV import
+});
+
+
+
+
+// -------------------- Credits --------------------
+
+Route::prefix('credits')->group(function () {
+    Route::get('/', [CreditController::class, 'index'])->name('credits.index');           // List all credits
+    Route::get('/create', [CreditController::class, 'create'])->name('credits.create');    // Show create form
+    Route::post('/store', [CreditController::class, 'store'])->name('credits.store');      // Store new credit
+
+
+});
+// -------------------- CLIENTS --------------------
+
+// Full resource routes for clients
+Route::resource('clients', ClientController::class);
+
+
+
+
+Route::get('/newprojects', [NewProjectController::class, 'index'])->name('newprojects.index');
+Route::get('/newprojects/create', [NewProjectController::class, 'create'])->name('newprojects.create');
+Route::post('/newprojects', [NewProjectController::class, 'store'])->name('newprojects.store');
