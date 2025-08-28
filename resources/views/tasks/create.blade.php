@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Clients')
+@section('title', 'Tasks-Create')
 
 @section('content')
     @vite(['resources/css/tasks.css', 'resources/js/app.js'])
     <!-- Breadcrumb -->
-    <div class="breadcrumb-container">
+<div class="breadcrumb-container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -23,7 +23,7 @@
             @endforeach
         </ol>
     </nav>
-    </div>
+</div>
 
     <!-- Form Container -->
     <div class="form-container">
@@ -41,12 +41,17 @@
                                 <option value="{{ $client->id }}">{{ $client->name }}</option>
                             @endforeach
                         </select>
+                        <a href="{{ route('client.create') }}" class="new-client-btn">New Client</a>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="project_id">Project</label>
                         <select class="form-control" id="project_id" name="project_id">
-                            <option value="">Select a project (optional)</option>                
+                            <option value="">Select a project (optional)</option>
+                            @foreach($projects as $project)
+                                <option value="{{ $project->id }}">{{ $project->name }}</option>
+                            @endforeach               
                         </select>
+                        <a href="{{ route('newprojects.create') }}" class="new-project-btn">New Project</a>
                     </div>
                 </div>
                 <div class="form-group">

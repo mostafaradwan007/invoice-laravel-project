@@ -115,7 +115,7 @@ body {
       width: 200px;
     }
 
-    .import-btn, .new-vendor-btn {
+    .import-btn, .new-vendor-btn, .new-expense-btn {
       color: white;
       border: none;
       padding: 8px 16px;
@@ -132,8 +132,8 @@ body {
     .import-btn { background-color: var(--success-green); }
     .import-btn:hover { background-color: #16a34a; }
 
-    .new-vendor-btn { background-color: var(--primary-blue); }
-    .new-vendor-btn:hover { background-color: #2563eb; }
+    .new-vendor-btn , .new-expense-btn { background-color: var(--primary-blue); }
+    .new-vendor-btn, .new-expense-btn:hover { background-color: #2563eb; }
 
     /* Data Table */
     .table-container {
@@ -358,3 +358,61 @@ body {
   pointer-events: none;
   opacity: 0.5;
 }
+
+
+    /* Form Container */
+    .form-container { max-width: 800px; margin: 0 auto; padding: 24px; }
+    .form-card { background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+    .form-title { font-size: 24px; font-weight: 600; color: #1f2937; margin-bottom: 32px; text-align: left; }
+
+    /* Form Fields */
+    .form-group { margin-bottom: 24px; }
+    .form-label { display: block; font-size: 14px; font-weight: 500; color: #374151; margin-bottom: 8px; }
+    .form-label.required::after { content: " *"; color: #ef4444; }
+    .form-control {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background-color: white;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Form Layout */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* Form Actions */
+    .form-actions {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    .btn-cancel {
+      background-color: #f3f4f6; color: #374151; border: 1px solid #d1d5db;
+      padding: 10px 20px; border-radius: 8px; font-size: 14px;
+      font-weight: 500; cursor: pointer; text-decoration: none;
+    }
+    .btn-cancel:hover { background-color: #e5e7eb; color: #374151; }
+    .btn-save {
+      background-color: var(--primary-blue); color: white; border: none;
+      padding: 10px 20px; border-radius: 8px; font-size: 14px;
+      font-weight: 500; cursor: pointer;
+    }
+    .btn-save:hover { background-color: #2563eb; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main-content { margin-left: 0; }
+      .form-container, .breadcrumb-container { padding: 16px; }
+      .form-card { padding: 24px 20px; }
+      .form-row { grid-template-columns: 1fr; gap: 20px; }
+    }

@@ -33,4 +33,10 @@ class Client extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
 }

@@ -3,38 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" type="image/png" href="../img/WhatsApp Image 2025-07-21 at 02.56.39_8af938a4.jpg">
+  <link rel="icon" type="image/png" href="{{asset('img/logo.png')}}">
   <title>POS Features | FatoraBee</title>
-  <link rel="icon" href="../images/logo.png" />
+  <link rel="icon" href="{{asset('img/logo.png')}}" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-  <link rel="stylesheet" href="pos-features.css" />
+  
 </head>
 <body>
-
+  @vite(['resources/css/pos-features.css', 'resources/js/pos-features.js'])
    <!-- Header -->
   <header class="bg-white shadow-sm py-3 sticky-top">
     <div class="container d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center">
         <i class="fas fa-receipt fa-lg text-warning me-2"></i>
-        <img src="../img/WhatsApp Image 2025-07-21 at 02.56.39_8af938a4.jpg" alt="FatoraBee Logo" class="logo-image me-2" style="width: 70px; height: 70px; object-fit: contain;">
+        <img src="{{asset('img/WhatsApp Image 2025-07-21 at 02.56.39_8af938a4.jpg')}}" alt="FatoraBee Logo" class="logo-image me-2" style="width: 70px; height: 70px; object-fit: contain;">
         <h4 class="m-0 fw-bold">
   <span class="text-dark">Fatora</span><span class="text-warning">Bee</span>
 </h4>
 
       </div>
-      <a href="../Home.html" class="btn btn-sm btn-outline-warning">Back Home</a>
+      <a href="{{route('home')}}" class="btn btn-sm btn-outline-warning">Back Home</a>
     </div>
   </header>
  <!-- Header Section -->
 <header class="hero-section text-center text-white d-flex align-items-center justify-content-center position-relative">
   <!-- خلفية النحل المتحرك -->
   <div class="floating-bees">
-    <img src="./135-1350985_bee-png-cute-bees-cartoon-transparent.png" class="bee bee-1" alt="Bee">
-    <img src="./135-1350985_bee-png-cute-bees-cartoon-transparent.png" class="bee bee-2" alt="Bee">
-    <img src="./135-1350985_bee-png-cute-bees-cartoon-transparent.png" class="bee bee-3" alt="Bee">
+    <img src="{{asset('storage/img/135-1350985_bee-png-cute-bees-cartoon-transparent.png')}}" class="bee bee-1" alt="Bee">
+    <img src="{{asset('storage/img/135-1350985_bee-png-cute-bees-cartoon-transparent.png')}}" class="bee bee-2" alt="Bee">
+    <img src="{{asset('storage/img/135-1350985_bee-png-cute-bees-cartoon-transparent.png')}}" class="bee bee-3" alt="Bee">
   </div>
 
   <div class="hero-content">
@@ -42,7 +42,7 @@
     <p class="lead animate__animated animate__fadeInUp animate__delay-1s">
       Simplify your sales, inventory, and customer management – all in one place.
     </p>
-    <a href="../dashboard/index.blade.php" class="btn btn-warning btn-lg mt-3 animate__animated animate__pulse animate__infinite">Get Started</a>
+    <a href="{{route('dashboard') }}" class="btn btn-warning btn-lg mt-3 animate__animated animate__pulse animate__infinite">Get Started</a>
   </div>
 
   <!-- عسل متحرك -->

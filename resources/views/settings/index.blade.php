@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('title', 'Settings')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,8 +37,8 @@
         }
 
         .page-container {
-            margin-left: 280px;
-            margin-top: 70px;
+            margin-left: 0px;
+            margin-top: 0px;
             min-height: calc(100vh - 70px);
         }
 
@@ -430,10 +436,10 @@
                                 Settings</a>
                         </li>
                         <li class="settings-sidebar-item" onclick="loadPage('task-settings')">
-                            <a href="{{ route('task.index') }}" onclick="event.preventDefault()">Task Settings</a>
+                            <a href="{{ route('task.settings.index') }}" onclick="event.preventDefault()">Task Settings</a>
                         </li>
                         <li class="settings-sidebar-item" onclick="loadPage('expense-settings')">
-                            <a href="{{ route('expense.index') }}" onclick="event.preventDefault()">Expense Settings</a>
+                            <a href="{{ route('expense.settings.index') }}" onclick="event.preventDefault()">Expense Settings</a>
                         </li>
                         <li class="settings-sidebar-item" onclick="loadPage('account-management')">
                             <a href="#" onclick="event.preventDefault()">Account
@@ -474,8 +480,6 @@
         </div>
     </div>
 
-    <!-- Watermark -->
-    <div class="watermark">Activate Windows</div>
 
     <script>
         // Page mapping for cleaner URLs and titles
@@ -600,3 +604,6 @@
 </body>
 
 </html>
+
+
+@endsection

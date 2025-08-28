@@ -9,7 +9,7 @@
                 <div class="tab active" data-tab="expense-general">General</div>
             </div>
         </div>
-        <form action="{{ route('expense.store') }}" method="POST">
+        <form action="{{ route('expense.settings.store') }}" method="POST">
             @csrf
             <div id="expense-general" class="tab-content active">
                 <div class="form-row">

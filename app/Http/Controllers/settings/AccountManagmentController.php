@@ -12,7 +12,7 @@ class AccountManagmentController extends Controller
 {
     public function index()
     {
-            $accountmanagment = AccountManagment::first();
+        $accountmanagment = AccountManagment::first();
 
         return view('settings.accountmanagment.index', compact('accountmanagment'));
     }

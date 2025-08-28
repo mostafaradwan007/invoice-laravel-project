@@ -19,12 +19,23 @@ class TaskController extends Controller
         return view('tasks.index', compact('tasks'));
     }
 
-    public function create()
-    {
+    public function create(){
         $clients = Client::orderBy('name')->get();
         $projects = Project::orderBy('name')->get();
-        return view('tasks.create', compact('clients', 'projects'));
-    }
+
+        $breadcrumbs = [
+            ['title' => 'Tasks', 'url' => route('tasks.index')],
+            ['title' => 'Create Task'] // current page
+        ];
+
+        return view('tasks.create', [
+            'clients' => $clients,
+            'projects' => $projects,
+            'breadcrumbs' => $breadcrumbs,
+            'pageTitle' => 'Create Task',
+        ]);
+}
+
 
     public function store(Request $request)
     {
@@ -45,8 +56,23 @@ class TaskController extends Controller
     {
         $clients = Client::orderBy('name')->get();
         $projects = Project::orderBy('name')->get();
-        return view('tasks.edit', compact('task', 'clients', 'projects'));
+        $task = Task::find($task->id);
+        $breadcrumbs = [
+            ['title' => 'Tasks', 'url' => route('tasks.index')],
+            ['title' => 'Edit Task'] // current page
+        ];
+
+        return view('tasks.edit', [
+            'clients' => $clients,
+            'projects' => $projects,
+            'breadcrumbs' => $breadcrumbs,
+            'pageTitle' => 'Edit Task',
+            'task' => $task,
+        ]);
     }
+   
+
+        
 
     public function update(Request $request, Task $task)
     {
@@ -56,6 +82,7 @@ class TaskController extends Controller
             'task_date' => 'nullable|date',
             'client_id' => 'nullable|exists:clients,id',
             'project_id' => 'nullable|exists:projects,id',
+            'status' => 'nullable|string|max:255'
         ]);
 
         $task->update($validatedData);

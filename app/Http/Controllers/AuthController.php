@@ -29,7 +29,7 @@ class AuthController extends Controller
             session(['success' => 'تم تسجيل الدخول بنجاح ✅']);
 
             // تحويل لصفحة profile.blade.php
-            return redirect()->route('profile')->with('success', 'تم تسجيل الدخول بنجاح ✅');
+            return redirect()->route('home')->with('success', 'تم تسجيل الدخول بنجاح ✅');
         }
 
         return back()->withErrors([
@@ -43,35 +43,36 @@ class AuthController extends Controller
         return view('auth.signup');
     }
 
-    // تنفيذ عملية التسجيل
     public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|min:2|max:255',
-            'email'    => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed',
-            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:5120'
-        ]);
+{
+    $request->validate([
+        'name'          => 'required|string|min:2|max:255',
+        'email'         => 'required|email|unique:users,email',
+        'password'      => 'required|string|min:6|confirmed',
+        'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:5120',
+    ]);
 
-        // رفع الصورة لو موجودة
-        $profileImagePath = null;
-        if ($request->hasFile('profile_image')) {
-            $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
-        }
-
-        // إنشاء المستخدم
-        $user = User::create([
-            'name'           => $request->name,
-            'email'          => $request->email,
-            'password'       => Hash::make($request->password),
-            'remember_token' => Str::random(60),
-        ]);
-
-        // تسجيل الدخول تلقائياً
-        Auth::login($user);
-
-        return redirect()->route('profile')->with('success', 'تم تسجيل الدخول بنجاح ✅');
+    // رفع الصورة لو موجودة
+    $profileImagePath = null;
+    if ($request->hasFile('profile_image')) {
+        $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
     }
+
+    // إنشاء المستخدم مع حفظ الصورة
+    $user = User::create([
+        'name'           => $request->name,
+        'email'          => $request->email,
+        'password'       => Hash::make($request->password),
+        'profile_image'  => $profileImagePath, // ✅ إضافة الصورة
+        'remember_token' => Str::random(60),
+    ]);
+
+    // تسجيل الدخول تلقائياً
+    Auth::login($user);
+
+    return redirect()->route('profile')->with('success', 'تم تسجيل الدخول بنجاح ✅');
+}
+
 
     // تسجيل الخروج
     public function logout(Request $request)

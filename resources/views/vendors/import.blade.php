@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Clients')
-
+@section('title', 'Vendors-Import')
 @section('content')
     @vite(['resources/css/vendors.css', 'resources/js/vendors.js'])
 

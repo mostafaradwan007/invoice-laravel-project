@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Clients')
+@section('title', 'Tasks')
 
 @section('content')
     @vite(['resources/css/tasks.css', 'resources/js/app.js'])
@@ -76,8 +76,8 @@
                     @forelse ($tasks as $task)
                         <tr>
                             <td><input type="checkbox" class="checkbox-input row-checkbox" name="task_ids[]" value="{{ $task->id }}"></td>
-                            <td><span class="status-badge status-running">{{-- $task->status --}}Running</span></td>
-                            <td>{{ $task->number }}</td>
+                            <td><span class="status-badge status-{{$task->status}}">{{ $task->status }}</span></td>
+                            <td>{{ $task->id }}</td>
                             <td>{{ $task->client->name ?? 'N/A' }}</td>
                             <td>{{ Str::limit($task->description, 50) }}</td>
                             <td>{{ $task->duration }}</td>

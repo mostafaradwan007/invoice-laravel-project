@@ -18,7 +18,8 @@ class User extends Authenticatable
         'password',
         'profile_image',
         'role',
-        'date'
+        'date',
+        'user_id',
     ];
 
     protected $hidden = [
@@ -30,4 +31,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'date' => 'datetime',
     ];
+
+    
 }

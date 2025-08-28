@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'Clients')
+@section('title', 'Vendors-Edit')
 
 @section('content')
     @vite(['resources/css/vendors.css'])

@@ -6,6 +6,7 @@
   <title>Profile | FatoraBee</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="{{ asset('profile.css') }}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <script src="https://kit.fontawesome.com/yourFontAwesomeKit.js" crossorigin="anonymous"></script>
 </head>
 <body class="theme-light">
@@ -13,6 +14,9 @@
   <!-- Light/Dark Mode Toggle -->
   <div class="position-absolute top-0 end-0 p-3">
     <button id="modeToggle" class="btn btn-outline-dark rounded-pill">🌙</button>
+    <a href="{{route('home')}}" class="btn btn-outline-primary rounded-pill">
+    <i class="bi bi-house-fill"></i>
+    </a>
   </div>
 
   <section class="profile-section py-5">
@@ -29,7 +33,7 @@
 
         <div class="d-flex align-items-center mb-4">
           <img src="{{ Auth::user()->profile_image ? asset('storage/'.Auth::user()->profile_image) : 'https://i.pravatar.cc/100?img=12' }}" 
-               class="rounded-circle me-4 profile-img" alt="User Photo">
+               class="rounded-circle me-4 profile-img " width="150" height="150" alt="User Photo">
           <div>
             <h4 class="mb-1">{{ Auth::user()->name }}</h4>
             <p class="text-muted mb-1">{{ Auth::user()->email }}</p>

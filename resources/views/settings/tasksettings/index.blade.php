@@ -1,8 +1,9 @@
+
 <!-- Task Settings Tab -->
 <div id="task-settings" class="form-content">
     <div class="settings-section">
         <h2 class="section-title">Task Settings</h2>
-        <form action="{{ route('task.store') }}" method="POST">
+        <form action="{{ route('task.settings.store') }}" method="POST">
             @csrf
             <div class="form-grid">
                 <div class="form-row">
@@ -118,7 +119,7 @@
             </div>
 
             <div class="form-actions">
-                <a href="{{ route('task.index') }}" class="btn-cancel">Cancel</a>
+                <a href="{{ route('task.settings.index') }}" class="btn-cancel">Cancel</a>
                 <button type="submit" class="btn-save">Save</button>
             </div>
 

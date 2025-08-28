@@ -26,4 +26,8 @@ class Vendor extends Model
         'postal_code',
         'country',
     ];
+
+   public function expense(){
+        return $this->hasMany(Expense::class);
+   }
 }

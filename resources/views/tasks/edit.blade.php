@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Clients')
+@section('title', 'Tasks-Edit')
 
 @section('content')
-@vite(['resources/css/tasks.css', 'resources/js/app.js'])    
-<!-- Breadcrumb -->
+    @vite(['resources/css/tasks.css', 'resources/js/app.js'])
+    <!-- Breadcrumb -->
     <div class="breadcrumb-container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -25,11 +25,12 @@
     </nav>
     </div>
 
+
     <!-- Form Container -->
     <div class="form-container">
         <div class="form-card">
-            <h1 class="form-title">Edit Task #{{ $task->number }}</h1>
-            
+            <h1 class="form-title">Edit Task{{ $task->number }}</h1>
+
             <form id="editTaskForm" action="{{ route('tasks.update', $task->id) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -38,8 +39,9 @@
                         <label class="form-label" for="client_id">Client</label>
                         <select class="form-control" id="client_id" name="client_id">
                             <option value="">Select a client (optional)</option>
-                            @foreach($clients as $client)
-                                <option value="{{ $client->id }}" {{ old('client_id', $task->client_id) == $client->id ? 'selected' : '' }}>
+                            @foreach ($clients as $client)
+                                <option value="{{ $client->id }}"
+                                    {{ old('client_id', $task->client_id) == $client->id ? 'selected' : '' }}>
                                     {{ $client->name }}
                                 </option>
                             @endforeach
@@ -54,7 +56,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label required" for="description">Description</label>
-                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4" required>{{ old('description', $task->description) }}</textarea>
+                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                        rows="4" required>{{ old('description', $task->description) }}</textarea>
                     @error('description')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
@@ -62,12 +65,26 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label" for="task_date">Date</label>
-                        <input type="date" class="form-control" id="task_date" name="task_date" value="{{ old('task_date', $task->task_date) }}">
+                        <input type="date" class="form-control" id="task_date" name="task_date"
+                            value="{{ old('task_date', $task->task_date) }}">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="duration">Duration</label>
-                        <input type="text" class="form-control" id="duration" name="duration" placeholder="e.g., 1:30 for 1h 30m" value="{{ old('duration', $task->duration) }}">
+                        <input type="text" class="form-control" id="duration" name="duration"
+                            placeholder="e.g., 1:30 for 1h 30m" value="{{ old('duration', $task->duration) }}">
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="status">Status</label>
+                    <select class="form-control" id="status" name="status">
+                        <option value="logged" {{ old('status', $task->status) == 'logged' ? 'selected' : '' }}>Logged
+                        </option>
+                        <option value="running" {{ old('status', $task->status) == 'running' ? 'selected' : '' }}>Running
+                        </option>
+                        <option value="invoiced" {{ old('status', $task->status) == 'invoiced' ? 'selected' : '' }}>
+                            Invoiced</option>
+                        <option value="paid" {{ old('status', $task->status) == 'paid' ? 'selected' : '' }}>Paid</option>
+                    </select>
                 </div>
                 <div class="form-actions">
                     <a href="{{ route('tasks.index') }}" class="btn-cancel">Cancel</a>

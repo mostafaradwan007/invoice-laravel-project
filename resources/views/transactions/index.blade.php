@@ -418,8 +418,6 @@
 <body>
     <!-- Include header and sidebar -->
 
-
-
     @include('layouts.navbar')
 
     @include('layouts.sidebar')
@@ -524,12 +522,7 @@
         </div>
 
 
-        <!-- Success Message -->
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+
 
 
         <!-- Data Table -->

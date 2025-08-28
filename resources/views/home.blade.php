@@ -28,24 +28,44 @@
 </button>
 
             
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="./Products/products.html">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./Why_page/whyus.html">Why Us?</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./POS Features/pos-features.html">POS Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./Pricing/pricing.html">Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./How It Works/How_It_Works.html">How It Works</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                    <li class="nav-item"><a class="btn btn-primary ms-2" href="{{ route('signup') }}">Sign up</a></li>
+<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
 
-                    <li class="nav-item">
-  <button id="toggleModeBtn" class="btn btn-outline-secondary ms-2">
-    🌙 Dark Mode
-  </button>
-</li>
+        <li class="nav-item"><a class="nav-link" href="./Products/products.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="./Why_page/whyus.html">Why Us?</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('pos-features')}}">POS Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="./Pricing/pricing.html">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="./How It Works/How_It_Works.html">How It Works</a></li>
 
-                </ul>
-            </div>
+        {{-- لو المستخدم مش عامل تسجيل دخول --}}
+        @guest
+            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+            <li class="nav-item"><a class="btn btn-primary ms-2" href="{{ route('signup') }}">Sign up</a></li>
+        @endguest
+
+        {{-- لو المستخدم عامل تسجيل دخول --}}
+        @auth
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('profile') }}">
+                    {{ Auth::user()->name }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-danger ms-2">Logout</button>
+                </form>
+            </li>
+        @endauth
+
+        <li class="nav-item">
+            <button id="toggleModeBtn" class="btn btn-outline-secondary ms-2">
+                🌙 Dark Mode
+            </button>
+        </li>
+    </ul>
+</div>
+
         </div>
     </nav>
 

@@ -522,12 +522,6 @@
         </div>
 
 
-         <!-- Success Message -->
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
 
         <!-- Data Table -->
         <div class="table-container">

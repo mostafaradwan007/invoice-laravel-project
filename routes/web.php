@@ -6,10 +6,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\RecurringInvoiceController; 
+use App\Http\Controllers\RecurringInvoiceController;
 use App\Http\Controllers\VendorController;    // Import VendorController
 use App\Http\Controllers\TaskController;    // Import TaskController
-use App\Http\Controllers\ProjectControl;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RecurringExpenseController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AuthController;
@@ -17,23 +17,27 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\settings\SettingsController;
 use App\Http\Controllers\settings\CompanyDetailsController;
 use App\Http\Controllers\settings\UserDetailsController;
-use App\Http\Controllers\settings\PaymentSettingsController;
+use App\Http\Controllers\settings\PaymentSettingsController as SettingsPaymentController;
 use App\Http\Controllers\settings\TaxController as SettingsTaxController;
 use App\Http\Controllers\settings\TaskController as SettingsTaskController;
 use App\Http\Controllers\settings\ProductsController;
-use App\Http\Controllers\settings\ExpenseController;
+use App\Http\Controllers\settings\ExpenseController as SettingsExpenseController;
 use App\Http\Controllers\settings\AccountManagmentController;
+use App\Http\Controllers\ExpenseController;
+use Hamcrest\Core\Set;
 
-
-
-
-
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\NewClientController;
+use App\Http\Controllers\CreditController;
+use App\Http\Controllers\NewProjectController;
 
 /*
 |--------------------------------------------------------------------------
 | Landing Pages (Homepage)
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -47,7 +51,7 @@ Route::get('/pricing', function () {
 })->name('pricing');
 
 Route::get('/pos-features', function () {
-    return view('pos-features');
+    return view('POS Features.pos-features');
 })->name('pos-features');
 
 Route::get('/why-us', function () {
@@ -67,7 +71,7 @@ Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup');
 Route::post('/signup', [AuthController::class, 'register'])->name('signup.post');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +80,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 */
 Route::middleware('auth')->group(function () {
 
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
     /*
     |--------------------------------------------------------------------------
     | Dashboard
@@ -177,25 +182,47 @@ Route::middleware('auth')->group(function () {
     Route::put('/recurring_expenses/{id}', [RecurringExpenseController::class, 'update'])->name('recurring_expense.update');
     Route::delete('/recurring_expenses/{recurring_expense}', [RecurringExpenseController::class, 'destroy'])->name('recurring_expense.destroy');
 
-    
-    //Vendor    
-Route::delete('/vendors/bulk-delete', [VendorController::class, 'destroyMultiple'])->name('vendors.destroy.multiple');        // Routes for the import functionality
-Route::get('/vendors/import', [VendorController::class, 'showImportForm'])->name('vendors.import');
-Route::post('/vendors/import', [VendorController::class, 'handleImport'])->name('vendors.import.handle');
-//Main Routes
-Route::resource('/vendors', VendorController::class);
-//Tasks
-// Custom routes for import and bulk actions
-Route::delete('/tasks/bulk-delete', [TaskController::class, 'destroyMultiple'])->name('tasks.destroy.multiple');
-Route::get('/tasks/import', [TaskController::class, 'showImportForm'])->name('tasks.import');
-Route::post('/tasks/import', [TaskController::class, 'handleImport'])->name('tasks.import.handle');
-// Main Routes
-Route::resource('/tasks', TaskController::class);
-Route::get('/projects-by-client/{client}', function($client){
-    $clientProjects = App\Models\Project::where('client_id', $client->id)->get();
-    return view('tasks.index', compact('client', 'clientProjects'));
-});
-    
+    /*
+    |--------------------------------------------------------------------------
+    | vendors Routes
+    |--------------------------------------------------------------------------
+    */
+    // Custom routes for import and bulk actions   
+    Route::delete('/vendors/bulk-delete', [VendorController::class, 'destroyMultiple'])->name('vendors.destroy.multiple');        // Routes for the import functionality
+    Route::get('/vendors/import', [VendorController::class, 'showImportForm'])->name('vendors.import');
+    Route::post('/vendors/import', [VendorController::class, 'handleImport'])->name('vendors.import.handle');
+    //Main Routes
+    Route::resource('/vendors', VendorController::class);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Tasks Routes
+    |--------------------------------------------------------------------------
+    */
+    // Custom routes for import and bulk actions
+    Route::delete('/tasks/bulk-delete', [TaskController::class, 'destroyMultiple'])->name('tasks.destroy.multiple');
+    Route::get('/tasks/import', [TaskController::class, 'showImportForm'])->name('tasks.import');
+    Route::post('/tasks/import', [TaskController::class, 'handleImport'])->name('tasks.import.handle');
+    // Main Routes
+    Route::resource('/tasks', TaskController::class);
+    Route::get('/projects-by-client/{client}', function ($client) {
+        $clientProjects = App\Models\Project::where('client_id', $client->id)->get();
+        return view('tasks.index', compact('client', 'clientProjects'));
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Expenses Routes
+    |--------------------------------------------------------------------------
+    */
+    // Custom routes for import and bulk actions
+    Route::get('/expenses/import', [ExpenseController::class, 'showImportForm'])->name('expenses.import');
+    Route::post('/expenses/import', [ExpenseController::class, 'handleImport'])->name('expenses.import.handle');
+    Route::delete('/expenses/bulk-delete', [ExpenseController::class, 'destroyMultiple'])->name('expenses.destroy.multiple');
+    // Standard resource route
+    Route::resource('expenses', ExpenseController::class);
+
+
     /*
     |--------------------------------------------------------------------------
     | Transaction Management
@@ -230,8 +257,8 @@ Route::get('/projects-by-client/{client}', function($client){
     Route::post('/settings/user-details', [UserDetailsController::class, 'store'])->name('userdetails.store');
 
     // Payment Settings
-    Route::get('/settings/payment-settings', [PaymentSettingsController::class, 'index'])->name('payment.index');
-    Route::post('/settings/payment-settings', [PaymentSettingsController::class, 'store'])->name('payment.store');
+    Route::get('/settings/payment-settings', [SettingsPaymentController::class, 'index'])->name('payment.index');
+    Route::post('/settings/payment-settings', [SettingsPaymentController::class, 'store'])->name('payment.store');
 
     // Tax Settings
     Route::get('/settings/tax-settings', [SettingsTaxController::class, 'index'])->name('tax.index');
@@ -244,12 +271,12 @@ Route::get('/projects-by-client/{client}', function($client){
     Route::post('/settings/products-settings', [ProductsController::class, 'store'])->name('productsettings.store');
 
     // Task Settings
-    Route::get('/settings/task-settings', [TaskController::class, 'index'])->name('task.index');
-    Route::post('/settings/task-settings', [TaskController::class, 'store'])->name('task.store');
+    Route::get('/settings/task-settings', [SettingsTaskController::class, 'index'])->name('task.settings.index');
+    Route::post('/settings/task-settings', [SettingsTaskController::class, 'store'])->name('task.settings.store');
 
     // Expense Settings
-    Route::get('/settings/expense-settings', [ExpenseController::class, 'index'])->name('expense.index');
-    Route::post('/settings/expense-settings', [ExpenseController::class, 'store'])->name('expense.store');
+    Route::get('/settings/expense-settings', [SettingsExpenseController::class, 'index'])->name('expense.settings.index');
+    Route::post('/settings/expense-settings', [SettingsExpenseController::class, 'store'])->name('expense.settings.store');
 
     // Account Management
     Route::get('/settings/account-managment', [AccountManagmentController::class, 'index'])->name('accountmanagment.index');
@@ -257,51 +284,101 @@ Route::get('/projects-by-client/{client}', function($client){
     Route::delete('/settings/account-managment', [AccountManagmentController::class, 'destroy'])->name('accountmanagment.destroy');
 
 
+    // عرض كل الفواتير
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
 
-// عرض كل الفواتير
-Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    // عرض فورم إضافة فاتورة جديدة
+    Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
 
-// عرض فورم إضافة فاتورة جديدة
-Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+    // حفظ فاتورة جديدة
+    Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
 
-// حفظ فاتورة جديدة
-Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+    // عرض تفاصيل فاتورة واحدة
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
 
-// عرض تفاصيل فاتورة واحدة
-Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+    // عرض فورم تعديل فاتورة
+    Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
 
-// عرض فورم تعديل فاتورة
-Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
+    // تحديث بيانات فاتورة
+    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
 
-// تحديث بيانات فاتورة
-Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
-
-// حذف فاتورة
-Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
-
+    // حذف فاتورة
+    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
 
 
 
 
 
-// عرض كل الفواتير
-Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring-invoices.index');
 
-// عرض فورم إضافة فاتورة جديدة
-Route::get('/recurring-invoices/create', [RecurringInvoiceController::class, 'create'])->name('recurring-invoices.create');
+    // عرض كل الفواتير
+    Route::get('/recurring-invoices', [RecurringInvoiceController::class, 'index'])->name('recurring-invoices.index');
 
-// حفظ فاتورة جديدة
-Route::post('/recurring-invoices', [RecurringInvoiceController::class, 'store'])->name('recurring-invoices.store');
+    // عرض فورم إضافة فاتورة جديدة
+    Route::get('/recurring-invoices/create', [RecurringInvoiceController::class, 'create'])->name('recurring-invoices.create');
 
-// عرض تفاصيل فاتورة واحدة
-Route::get('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'show'])->name('recurring-invoices.show');
+    // حفظ فاتورة جديدة
+    Route::post('/recurring-invoices', [RecurringInvoiceController::class, 'store'])->name('recurring-invoices.store');
 
-// عرض فورم تعديل فاتورة
-Route::get('/recurring-invoices/{invoice}/edit', [RecurringInvoiceController::class, 'edit'])->name('recurring-invoices.edit');
+    // عرض تفاصيل فاتورة واحدة
+    Route::get('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'show'])->name('recurring-invoices.show');
 
-// تحديث بيانات فاتورة
-Route::put('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'update'])->name('recurring-invoices.update');
+    // عرض فورم تعديل فاتورة
+    Route::get('/recurring-invoices/{invoice}/edit', [RecurringInvoiceController::class, 'edit'])->name('recurring-invoices.edit');
 
-// حذف فاتورة
-Route::delete('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'destroy'])->name('recurring-invoices.destroy');
+    // تحديث بيانات فاتورة
+    Route::put('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'update'])->name('recurring-invoices.update');
+
+    // حذف فاتورة
+    Route::delete('/recurring-invoices/{invoice}', [RecurringInvoiceController::class, 'destroy'])->name('recurring-invoices.destroy');
+
+
+
+    /*--------------------------------- Yassmin Routes-----------------------------*/
+    // -------------------- PAYMENTS --------------------
+
+    // Show import form + process import + download template
+    Route::prefix('payments')->group(function () {
+        Route::get('/import', [PaymentController::class, 'showImportForm'])->name('payments.import.form');
+        Route::post('/import', [PaymentController::class, 'import'])->name('payments.import');
+        Route::get('/template', [PaymentController::class, 'downloadTemplate'])->name('payments.template');
+    });
+
+    // Resource routes for payments (excluding show)
+    Route::resource('payments', PaymentController::class)->except(['show']);
+
+
+    // -------------------- QUOTES --------------------
+
+    Route::prefix('quotes')->group(function () {
+        Route::get('/', [QuoteController::class, 'index'])->name('quotes.index');           // List all quotes
+        Route::get('/create', [QuoteController::class, 'create'])->name('quotes.create');    // Show create form
+        Route::post('/store', [QuoteController::class, 'store'])->name('quotes.store');      // Store new quote
+
+        Route::get('/import', [QuoteController::class, 'showImportForm'])->name('quotes.import.form'); // Show import form
+        Route::get('/template', [QuoteController::class, 'downloadTemplate'])->name('quotes.template');
+
+        Route::post('/import', [QuoteController::class, 'import'])->name('quotes.import');   // Process CSV import
+    });
+
+
+
+
+    // -------------------- Credits --------------------
+
+    Route::prefix('credits')->group(function () {
+        Route::get('/', [CreditController::class, 'index'])->name('credits.index');           // List all credits
+        Route::get('/create', [CreditController::class, 'create'])->name('credits.create');    // Show create form
+        Route::post('/store', [CreditController::class, 'store'])->name('credits.store');      // Store new credit
+
+
+    });
+    // -------------------- CLIENTS --------------------
+
+    //Full resource routes for clients
+    Route::resource('clients', ClientController::class);
+
+    Route::get('/newprojects', [ProjectController::class, 'index'])->name('newprojects.index');
+    Route::get('/newprojects/create', [ProjectController::class, 'create'])->name('newprojects.create');
+    Route::post('/newprojects', [ProjectController::class, 'store'])->name('newprojects.store');
+
 });

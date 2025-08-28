@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Clients')
+@section('title', 'Vendors')
 
 @section('content')
     @vite(['resources/css/vendors.css', 'resources/js/app.js'])
@@ -32,7 +32,9 @@
                 <button class="actions-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Actions</button>
                 <ul class="dropdown-menu">
                     {{-- This button will submit the form --}}
-                    <li><button type="submit" form="bulk-delete-form" class="dropdown-item" onclick="return confirm('Are you sure you want to delete the selected vendors?')">Delete Selected</button></li>
+                    <li><button type="submit" form="bulk-delete-form" class="dropdown-item"
+                            onclick="return confirm('Are you sure you want to delete the selected vendors?')">Delete
+                            Selected</button></li>
                     <li><a class="dropdown-item" href="#">Archive Selected</a></li>
                 </ul>
             </div>
@@ -80,7 +82,8 @@
                     {{-- This is a Blade loop to display data from your controller --}}
                     @forelse ($vendors as $vendor)
                         <tr>
-                            <td><input type="checkbox" class="checkbox-input row-checkbox" name="vendor_ids[]" value="{{ $vendor->id }}"></td>
+                            <td><input type="checkbox" class="checkbox-input row-checkbox" name="vendor_ids[]"
+                                    value="{{ $vendor->id }}"></td>
                             <td>{{ $vendor->number }}</td>
                             <td>{{ $vendor->name }}</td>
                             <td>{{ $vendor->city }}</td>
@@ -103,168 +106,100 @@
 
 
             <div class="pagination-container">
-  <div class="pagination-info">
-    <select id="rowsSelect" class="rows-select">
-      <option value="1"  {{ request('per_page') == 1 ? 'selected' : '' }}>1</option>
-      <option value="2"  {{ request('per_page') == 2 ? 'selected' : '' }}>2</option>
-      <option value="50"  {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-      <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
-    </select>
-    <span>rows</span>
-  </div>
+                <div class="pagination-info">
+                    <select id="rowsSelect" class="rows-select">
+                        <option value="1" {{ request('per_page') == 1 ? 'selected' : '' }}>1</option>
+                        <option value="2" {{ request('per_page') == 2 ? 'selected' : '' }}>2</option>
+                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                    </select>
+                    <span>rows</span>
+                </div>
 
-  <div class="page-info">
-    Page {{ $vendors->currentPage() }} of {{ $vendors->lastPage() }}
-  </div>
+                <div class="page-info">
+                    Page {{ $vendors->currentPage() }} of {{ $vendors->lastPage() }}
+                </div>
 
-  <div class="pagination-controls">
-    
+                <div class="pagination-controls">
 
-    @php
-      $q = request()->except('page'); // نحافظ على باقي الباراميترات
-      $firstUrl = request()->fullUrlWithQuery(array_merge($q, ['page' => 1]));
-      $prevUrl  = $vendors->onFirstPage()
-                  ? null
-                  : request()->fullUrlWithQuery(array_merge($q, ['page' => $vendors->currentPage() - 1]));
-      $nextUrl  = $vendors->hasMorePages()
-                  ? request()->fullUrlWithQuery(array_merge($q, ['page' => $vendors->currentPage() + 1]))
-                  : null;
-      $lastUrl  = request()->fullUrlWithQuery(array_merge($q, ['page' => $vendors->lastPage()]));
-    @endphp
 
-    <div class="pagination-nav">
-      <a href="{{ $vendors->onFirstPage() ? '#' : $firstUrl }}"
-         class="pagination-btn {{ $vendors->onFirstPage() ? 'disabled' : '' }}">
-        <i class="bi bi-chevron-double-left"></i>
-      </a>
+                    @php
+                        $q = request()->except('page'); // نحافظ على باقي الباراميترات
+                        $firstUrl = request()->fullUrlWithQuery(array_merge($q, ['page' => 1]));
+                        $prevUrl = $vendors->onFirstPage()
+                            ? null
+                            : request()->fullUrlWithQuery(array_merge($q, ['page' => $vendors->currentPage() - 1]));
+                        $nextUrl = $vendors->hasMorePages()
+                            ? request()->fullUrlWithQuery(array_merge($q, ['page' => $vendors->currentPage() + 1]))
+                            : null;
+                        $lastUrl = request()->fullUrlWithQuery(array_merge($q, ['page' => $vendors->lastPage()]));
+                    @endphp
 
-      <a href="{{ $prevUrl ?? '#' }}"
-         class="pagination-btn {{ $vendors->onFirstPage() ? 'disabled' : '' }}">
-        <i class="bi bi-chevron-left"></i>
-      </a>
+                    <div class="pagination-nav">
+                        <a href="{{ $vendors->onFirstPage() ? '#' : $firstUrl }}"
+                            class="pagination-btn {{ $vendors->onFirstPage() ? 'disabled' : '' }}">
+                            <i class="bi bi-chevron-double-left"></i>
+                        </a>
 
-      <a href="{{ $nextUrl ?? '#' }}"
-         class="pagination-btn {{ !$vendors->hasMorePages() ? 'disabled' : '' }}">
-         <i class="bi bi-chevron-right"></i>
-      </a>
+                        <a href="{{ $prevUrl ?? '#' }}"
+                            class="pagination-btn {{ $vendors->onFirstPage() ? 'disabled' : '' }}">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
 
-      <a href="{{ $vendors->hasMorePages() ? $lastUrl : '#' }}"
-         class="pagination-btn {{ !$vendors->hasMorePages() ? 'disabled' : '' }}">
-        <i class="bi bi-chevron-double-right"></i>
-      </a>
-    </div>
-  </div>
-</div>
+                        <a href="{{ $nextUrl ?? '#' }}"
+                            class="pagination-btn {{ !$vendors->hasMorePages() ? 'disabled' : '' }}">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+
+                        <a href="{{ $vendors->hasMorePages() ? $lastUrl : '#' }}"
+                            class="pagination-btn {{ !$vendors->hasMorePages() ? 'disabled' : '' }}">
+                            <i class="bi bi-chevron-double-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </form>
 
 
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const rowsSelect = document.getElementById("rowsSelect");
-    const paginationButtons = document.querySelectorAll(".pagination-btn");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const rowsSelect = document.getElementById("rowsSelect");
+            const paginationButtons = document.querySelectorAll(".pagination-btn");
 
-    // تغيير عدد الصفوف
-    if (rowsSelect) {
-        rowsSelect.addEventListener("change", function() {
-            const perPage = this.value;
-            const url = new URL(window.location.href);
-            url.searchParams.set("per_page", perPage);
-            url.searchParams.delete("page"); // نرجع للصفحة الأولى
-            window.location.href = url.toString();
+            //change rows per page
+            if (rowsSelect) {
+                rowsSelect.addEventListener("change", function() {
+                    const perPage = this.value;
+                    const url = new URL(window.location.href);
+                    url.searchParams.set("per_page", perPage);
+                    url.searchParams.delete("page"); // نرجع للصفحة الأولى
+                    window.location.href = url.toString();
+                });
+            }
+
+            //navigate pages
+            paginationButtons.forEach(btn => {
+                btn.addEventListener("click", function() {
+                    if (this.hasAttribute("disabled")) return;
+                    const page = this.getAttribute("data-page");
+                    const url = new URL(window.location.href);
+                    url.searchParams.set("page", page);
+                    url.searchParams.set("per_page", rowsSelect ? rowsSelect.value : 10);
+                    window.location.href = url.toString();
+                });
+            });
         });
-    }
 
-    // التنقل بين الصفحات
-    paginationButtons.forEach(btn => {
-        btn.addEventListener("click", function() {
-            if (this.hasAttribute("disabled")) return;
-            const page = this.getAttribute("data-page");
-            const url = new URL(window.location.href);
-            url.searchParams.set("page", page);
-            url.searchParams.set("per_page", rowsSelect ? rowsSelect.value : 10);
-            window.location.href = url.toString();
-        });
-    });
-});
-
-
-
-document.getElementById('select-all').addEventListener('change', function(e) {
+        document.getElementById('select-all').addEventListener('change', function(e) {
             const checkboxes = document.querySelectorAll('.row-checkbox');
             checkboxes.forEach(checkbox => {
                 checkbox.checked = e.target.checked;
             });
         });
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const fileUploadArea = document.getElementById('fileUploadArea');
-    const fileInput = document.getElementById('csvFile');
-    const selectedFile = document.getElementById('selectedFile');
-    const fileName = document.getElementById('fileName');
-    const fileSize = document.getElementById('fileSize');
-    const removeFileBtn = document.getElementById('removeFileBtn');
-    const importBtn = document.getElementById('importBtn');
-
-    fileUploadArea.addEventListener('dragover', (e) => { e.preventDefault(); fileUploadArea.classList.add('dragover'); });
-    fileUploadArea.addEventListener('dragleave', (e) => { e.preventDefault(); fileUploadArea.classList.remove('dragover'); });
-    fileUploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        fileUploadArea.classList.remove('dragover');
-        if (e.dataTransfer.files.length > 0) handleFileSelection(e.dataTransfer.files[0]);
-    });
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) handleFileSelection(e.target.files[0]);
-    });
-    removeFileBtn.addEventListener('click', resetFileSelection);
-
-    function handleFileSelection(file) {
-        if (!file.name.toLowerCase().endsWith('.csv')) {
-            alert('Please select a CSV file.');
-            return;
-        }
-        fileName.textContent = file.name;
-        fileSize.textContent = formatFileSize(file.size);
-        selectedFile.classList.add('show');
-        fileUploadArea.style.display = 'none';
-        importBtn.classList.add('active');
-    }
-
-    function resetFileSelection() {
-        fileInput.value = '';
-        selectedFile.classList.remove('show');
-        fileUploadArea.style.display = 'block';
-        importBtn.classList.remove('active');
-    }
-
-    function formatFileSize(bytes) {
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024;
-        const sizes = ['Bytes', 'KB', 'MB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-    }
-
-    document.getElementById('downloadTemplate').addEventListener('click', function (e) {
-        e.preventDefault();
-        const csvContent = 'Name,Contact Name,Contact Email,Phone,Website\n' +
-            'Office Supplies Inc.,John Doe,john@os.com,555-1234,https://os.com\n' +
-            'Marketing Solutions,Jane Smith,jane@ms.com,555-5678,https://ms.com';
-
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'vendor-import-template.csv';
-        a.click();
-        window.URL.revokeObjectURL(url);
-    });
-});
-   </script>
+    </script>
 
 
 
