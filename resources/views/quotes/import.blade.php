@@ -567,4 +567,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 @endsection
 
-
